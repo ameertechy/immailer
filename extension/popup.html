@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immailer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 360px; min-height: 400px; font-family: -apple-system, sans-serif; background: #fff; color: #1a1a1a; }
+  .header { background: #0d6832; color: #fff; padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
+  .header h1 { font-size: 16px; font-weight: 600; letter-spacing: -0.3px; }
+  .header .dot { width: 8px; height: 8px; border-radius: 50%; background: #5eff9e; }
+  .tabs { display: flex; border-bottom: 1px solid #e5e7eb; }
+  .tab { flex: 1; padding: 10px; text-align: center; font-size: 12px; cursor: pointer; color: #6b7280; border-bottom: 2px solid transparent; }
+  .tab.active { color: #0d6832; border-bottom-color: #0d6832; font-weight: 500; }
+  .panel { display: none; padding: 12px; max-height: 340px; overflow-y: auto; }
+  .panel.active { display: block; }
+  .email-row { border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: background 0.15s; }
+  .email-row:hover { background: #f9fafb; }
+  .email-subject { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .email-meta { font-size: 11px; color: #6b7280; margin-top: 3px; }
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+  .badge.opened { background: #dcfce7; color: #15803d; }
+  .badge.pending { background: #f3f4f6; color: #6b7280; }
+  .event-row { padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 12px; }
+  .event-row:last-child { border-bottom: none; }
+  .event-time { color: #6b7280; font-size: 11px; }
+  .event-loc { color: #374151; }
+  .empty { text-align: center; padding: 40px 20px; color: #9ca3af; font-size: 13px; }
+  .settings-row { padding: 8px 0; }
+  .settings-row label { font-size: 12px; color: #374151; display: block; margin-bottom: 4px; }
+  .settings-row input { width: 100%; padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 12px; }
+  .btn { width: 100%; padding: 8px; background: #0d6832; color: #fff; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; margin-top: 8px; }
+  .btn:hover { background: #0a5528; }
+  .back-btn { font-size: 11px; color: #0d6832; cursor: pointer; margin-bottom: 10px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="dot"></div>
+  <h1>Immailer</h1>
+</div>
+<div class="tabs">
+  <div class="tab active" data-tab="emails">Sent</div>
+  <div class="tab" data-tab="settings">Settings</div>
+</div>
+
+<div class="panel active" id="panel-emails">
+  <div id="emails-list"></div>
+</div>
+
+<div class="panel" id="panel-detail">
+  <span class="back-btn" id="back-btn">← Back</span>
+  <div id="detail-content"></div>
+</div>
+
+<div class="panel" id="panel-settings">
+  <div class="settings-row">
+    <label>API Key (from your .env)</label>
+    <input type="password" id="api-key-input" placeholder="your_secret_key_here">
+  </div>
+  <div class="settings-row">
+    <label>Server URL</label>
+    <input type="text" id="server-url-input" placeholder="https://immailer.onrender.com">
+  </div>
+  <button class="btn" id="save-settings">Save Settings</button>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
