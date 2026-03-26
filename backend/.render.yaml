@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: immailer-backend
+    env: python
+    pythonVersion: 3.13.12
+    rootDir: backend
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        value: "postgresql://postgres:nSGg/2*iA-*-he9@db.ipapumhuucaifqcmzjsl.supabase.co:5432/postgres"
+      - key: API_KEY
+        value: "immailer_secret_2024"
